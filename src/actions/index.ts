@@ -14,17 +14,35 @@ export async function deleteSnippet(id:number){
     redirect('/');
 }
 
-export async function createSnippet(formData: FormData) {
+export async function createSnippet(formState: {message: string} , formData: FormData) {
     //server action
-
+    
     //check user input and make sure it is valid
-    const title = formData.get("title") as string;
-    const code = formData.get("code") as string;
-    //create new record in database
+   try {
+    
+     const title = formData.get("title") as string;
+     const code = formData.get("code") as string;
+     
+     if(typeof title !== "string" || title.length < 3 ){
+       return {message: 'Title Must Be Longer'}
+      }
+      
+      if(typeof code !== "string" || code.length < 10 ){
+        return {message: 'Code Must Be Longer'}
+      }
+      
+      //create new record in database
+      
+      await db.snippet.create({
+        data: { title: title, code: code },
+      });
+    } 
+    catch (error : unknown) {
+      error instanceof Error ? {message: error.message} : {message: 'something went wrong'}
+      
+    }
 
-    const snippet = await db.snippet.create({
-      data: { title: title, code: code },
-    });
     // redirect homepage
     redirect("/");
-  }
+     
+    }
