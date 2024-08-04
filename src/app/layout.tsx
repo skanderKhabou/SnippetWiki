@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className=" flex items-center">
           <Link className="font-bold mx-auto text-2xl" href="/">
-            Home Sweet Home
+            Snippet Wiki | Home
           </Link>
         </div>
         <div className="container mx-auto px-12">{children}</div>
