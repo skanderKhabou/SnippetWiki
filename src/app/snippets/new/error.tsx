@@ -1,8 +1,8 @@
 "use client";
 interface ErrorPageProps {
   error: Error;
-  reset: () => {};
+  reset: () => void;
 }
-export default function SnippetErrorPage({ error }: ErrorPageProps) {
+export default function ErrorPage({ error }: ErrorPageProps) {
   return <div>{error.message}</div>;
 }

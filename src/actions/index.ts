@@ -23,8 +23,8 @@ export async function createSnippet(formState: {message: string} , formData: For
     //check user input and make sure it is valid
    try {
     
-     const title = formData.get("title") as string;
-     const code = formData.get("code") as string;
+     const title = formData.get("title");
+     const code = formData.get("code");
      
      if(typeof title !== "string" || title.length < 3 ){
        return {message: 'Title Must Be Longer'}
@@ -37,16 +37,16 @@ export async function createSnippet(formState: {message: string} , formData: For
       //create new record in database
       
       await db.snippet.create({
-        data: { title: title, code: code },
+        data: { title, code },
       });
     } 
     catch (error : unknown) {
-      error instanceof Error ? {message: error.message} : {message: 'something went wrong'}
+      error instanceof Error ? {message: error.message} : {message: 'something went wrong...'}
       
     }
 
 // revalidate homepapage control caching
-revalidatePath('/')
+revalidatePath('/');
 
     // redirect homepage
     redirect("/");

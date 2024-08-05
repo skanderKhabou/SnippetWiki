@@ -1,6 +1,6 @@
 "use client";
-import * as actions from "@/actions";
 import { useFormState } from "react-dom";
+import * as actions from "@/actions";
 
 export default function SnippetCreatePage() {
   const [formState, action] = useFormState(actions.createSnippet, {
@@ -8,7 +8,7 @@ export default function SnippetCreatePage() {
   });
 
   return (
-    <form className="" action={action}>
+    <form action={action}>
       <h3 className="font-bold m-3"> Create a Snippet</h3>
       <div className="flex flex-col gap-4">
         <div className="flex gap-4">
