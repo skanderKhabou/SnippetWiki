@@ -7,10 +7,16 @@
 import { db } from "@/db";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+// this usable when we want to disable caching it s more appropriate when we use an external api that we don t know the bahavior
+// export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const snippets = await db.snippet.findMany();
+  let snippets: { id: number; title: string; code: string }[] = [];
+  try {
+    snippets = await db.snippet.findMany();
+  } catch (error) {
+    console.error("Error fetching snippets:", error);
+  }
   const renderSnippets = snippets.map((snippet) => {
     return (
       <Link
