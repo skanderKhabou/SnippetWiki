@@ -6,6 +6,7 @@
 
 import { db } from "@/db";
 import Link from "next/link";
+import * as actions from "@/actions";
 
 // this usable when we want to disable caching it s more appropriate when we use an external api that we don t know the bahavior
 // export const dynamic = "force-dynamic";
@@ -34,6 +35,15 @@ export default async function Home() {
     <div>
       <div className="flex m-2 justify-between items-center">
         <h1 className="font-bold  text-xl">Snippets</h1>
+        <form action={actions.filterSnippets}>
+          <input
+            type="search"
+            name="searchTitle"
+            id="searchTitle"
+            placeholder="Search Your Snippet Here"
+          />
+          <button type="submit">Search</button>
+        </form>
         <Link href="/snippets/new" className="border p-2 border-r rounded-xl ">
           NEW
         </Link>

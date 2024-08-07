@@ -52,3 +52,12 @@ revalidatePath('/');
     redirect("/");
      
     }
+
+    export async function filterSnippets (formData: FormData) {
+        const snippets = await db.snippet.findMany();
+        const search = formData.get("searchTitle") as string;
+    const filteredArray = snippets.filter((snippet) => {
+      return snippet.title.toLowerCase().includes(search.toLowerCase());
+    });
+      console.log(filteredArray)
+    }
